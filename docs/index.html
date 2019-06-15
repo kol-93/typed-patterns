@@ -64,6 +64,39 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<h1 id="typed-patterns">Typed-Patterns</h1>
+				<p>Basic design patterns for TypeScript.</p>
+				<p><a href="https://kol-93.github.io/typed-patterns">Documentation</a></p>
+				<p><em>This project is under development and may make breaking changes in minor versions until 1.0.</em></p>
+				<h2 id="installation">Installation</h2>
+				<pre><code class="language-bash">npm install typed-patterns</code></pre>
+				<h2 id="patterns">Patterns</h2>
+				<h3 id="behavioral">Behavioral</h3>
+				<ul>
+					<li>Synchronous and asynchronous <strong>chain-of-responsibility</strong>. See examples in <code>source/examples/behavioral/chain-of-responsibility</code> </li>
+				</ul>
+				<h2 id="utilities">Utilities</h2>
+				<h3 id="asynchronous-helpers">Asynchronous helpers</h3>
+				<ul>
+					<li><code>success(callback, ...result)</code> calls specified callback as successful with array of results</li>
+					<li><code>fail(callback, error)</code> calls specified callback as failed with specified error</li>
+					<li><code>join(onSuccess, onError)</code> builds classical callback function from two success-callback and error-callback</li>
+					<li><code>wrapCallback(callback)</code> builds callback function that wraps array of success results into single tuple</li>
+					<li><code>unwrapCallback(callback)</code> builds callback function that unwraps single tuple to an array of success results</li>
+					<li><code>wrapWorker(worker)</code> builds asynchronous worker function that wraps array of results into single tuple</li>
+					<li><code>unwrapWorker(worker)</code> builds asynchronous worker function that unwraps single result to an array of results</li>
+					<li><code>collect(workersCollection)</code> builds asynchronous worker that collects results from all passed workers</li>
+					<li><code>guardAsyncProcessor(guard, processor)</code> builds asynchronous processor responsible only for type-guarded context</li>
+				</ul>
+				<h3 id="promise-helpers">Promise helpers</h3>
+				<ul>
+					<li><code>guardPromiseProcessor(guard, processor)</code> builds asynchronous processor responsible only for type-guarded context</li>
+				</ul>
+				<h3 id="unexpected-context-exception-helpers">Unexpected context exception helpers</h3>
+				<ul>
+					<li><code>class Unexpected</code> Base class of unexpected context exception</li>
+					<li><code>unexpected(message?, callback?, next?)</code> Calls next (if specified) or passes Unexpected exception to callback (if specified)</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -74,6 +107,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_behavioral_chain_of_responsibility_buid_async_processor_.html">"behavioral/chain-<wbr>of-<wbr>responsibility/buid.async.processor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_behavioral_chain_of_responsibility_build_sync_processor_.html">"behavioral/chain-<wbr>of-<wbr>responsibility/build.sync.processor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_behavioral_chain_of_responsibility_index_.html">"behavioral/chain-<wbr>of-<wbr>responsibility/index"</a>
