@@ -1,2 +1,3 @@
-export { AsyncProcessor, IChainedProcessor } from './interface';
-export { buildAsyncProcessor } from './buid.async.processor';
+export * from './interface';
+export * from './buid.async.processor';
+export * from './build.sync.processor';

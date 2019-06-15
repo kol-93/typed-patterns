@@ -1,6 +1,8 @@
-import { Callback, getPromisifyCustomSymbol, nextTick, unexpected, fail } from '../../util';
+import * as dbg from 'debug';
+import { Callback, getPromisifyCustomSymbol, nextTick, unexpected, fail, TypedFunction } from '../../util';
 import { AsyncProcessor, IChainedProcessor } from './interface';
 
+const debug = dbg.debug('typed-patterns/behavioral/build.async.processor');
 const custom = getPromisifyCustomSymbol();
 
 /**
@@ -11,50 +13,57 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
   processors: Iterable<AsyncProcessor<Context, Result, Exception>>
 ): IChainedProcessor<Context, Result, Exception> {
   function chained(context: Context, callback?: Callback<Result, Exception>, next?: () => void) {
-    var iterator: Iterator<AsyncProcessor<Context, Result, Exception>> | null = processors[Symbol.iterator]();
-    var i = 0;
-    var called = false;
-    const cb: Callback<Result, Exception> = (error, ...result) => {
-      iterator = null;
-      if (typeof callback === 'function') {
-        try {
-          if (!called) {
-            callback(error, ...result);
-            called = true;
-          }
-        } catch (e) {
-          console.warn('Unexpected during chain', e);
-        }
-      } else {
-        console.warn('Skipped result from chain', arguments);
-      }
-    };
-    function tryNext() {
-      if (iterator) {
-        const it = iterator.next();
-        i += 1;
-        if (!it.done) {
-          nextTick(() => {
-            try {
-              it.value.call(null, context, cb, tryNext);
-            } catch (e) {
-              fail(cb, e);
-            }
-          });
+    let iterator: Iterator<AsyncProcessor<Context, Result, Exception>> | null = processors[Symbol.iterator]();
+    let activeProcessor = 0;
+    function cbi(callbackProcessor?: number): Callback<Result, Exception> {
+      return function _callback() {
+        if (callbackProcessor !== undefined && activeProcessor !== callbackProcessor) {
+          debug(new Error('Late callback detected. Suppressing'));
+          return;
+        } else if (iterator === null) {
+          debug(new Error('Duplicate callback detected. Suppressing'));
+          return;
         } else {
-          if (typeof next === 'function') {
+          iterator = null;
+          if (typeof callback === 'function') {
             try {
-              next();
+              (callback as Function).apply(null, arguments);
             } catch (e) {
-              console.warn('Unexpected during chain.next', e);
+              debug('Unexpected during chain', e);
             }
           } else {
-            unexpected(undefined, callback, next);
+            debug('Skipped result from chain', arguments);
           }
         }
-      }
+      };
     }
-    tryNext();
+    function nexti(callbackProcessor?: number): TypedFunction<[], void> {
+      return function _next() {
+        if (callbackProcessor !== undefined && activeProcessor !== callbackProcessor) {
+          debug(new Error('Duplicate next call detected. Suppressing'));
+          return;
+        } else if (iterator === null) {
+          debug(new Error('Next call detected after callback. Suppressing'));
+          return;
+        } else {
+          const it = iterator.next();
+          activeProcessor += 1;
+          if (!it.done) {
+            nextTick(() => {
+              try {
+                it.value.call(null, context, cbi(activeProcessor), nexti(activeProcessor));
+              } catch (e) {
+                fail(cbi(activeProcessor), e);
+              }
+            });
+          } else {
+            unexpected(undefined, cbi(activeProcessor), next);
+          }
+        }
+      };
+    }
+
+    nexti()();
   }
 
   if (typeof custom === 'symbol') {

@@ -1,6 +1,6 @@
-import { success } from '../../../util';
+import { Callback, success } from '../../../util';
 import * as util from '../../../util';
-import { buildAsyncProcessor } from '../../../behavioral/chain-of-responsibility';
+import { buildAsyncProcessor, Next } from '../../../behavioral/chain-of-responsibility';
 
 describe('buildAsyncProcessor', () => {
   it('should return function', () => {
@@ -77,17 +77,66 @@ describe('buildAsyncProcessor', () => {
 
   it('should break chain after first callback', done => {
     const fn = jest.fn();
-    const proc2 = jest.fn();
-    buildAsyncProcessor([
-      (context, callback, next) => {
-        success(callback);
-      },
-      proc2
-    ])({}, fn);
+    const proc1 = jest.fn((context: {}, callback?: Callback<[number]>, next?: Next) => {
+      success(callback, 1);
+      if (typeof next === 'function') {
+        next();
+      }
+    });
+    const proc2 = jest.fn((context: {}, callback?: Callback<[number]>, next?: Next) => {
+      success(callback, 2);
+    });
+    buildAsyncProcessor([proc1, proc2])({}, fn);
 
     setTimeout(() => {
-      expect(fn).toBeCalled();
+      expect(proc1).toBeCalled();
       expect(proc2).not.toBeCalled();
+      expect(fn).toBeCalledWith(null, 1);
+      done();
+    }, 1);
+  });
+
+  it('should suppress callbacks from processors that called next', (done) => {
+    const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, next?: () => void) => {
+      if (typeof next === 'function') {
+        next();
+      }
+      util.success(cb, 1);
+    });
+
+    const p2 = jest.fn((context: {}, cb?: Callback<[number], Error>, next?: () => void) => {
+      util.success(cb, 2);
+    });
+
+    const callback = jest.fn();
+
+    buildAsyncProcessor([p1, p2])({}, callback);
+    setTimeout(() => {
+      expect(p1).toBeCalled();
+      expect(p2).toBeCalled();
+      expect(callback).toBeCalledTimes(1);
+      expect(callback).toBeCalledWith(null, 2);
+      done();
+    }, 1);
+  });
+
+  it('should suppress next calls after callback', (done) => {
+    const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
+      util.success(cb, 1);
+      if (typeof n === 'function') {
+        n();
+      }
+    });
+
+    const callback = jest.fn();
+    const next = jest.fn();
+
+    buildAsyncProcessor([p1])({}, callback, next);
+    setTimeout(() => {
+      expect(p1).toBeCalled();
+      expect(callback).toBeCalledTimes(1);
+      expect(callback).toBeCalledWith(null, 1);
+      expect(next).not.toBeCalled();
       done();
     }, 1);
   });

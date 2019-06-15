@@ -1,5 +1,9 @@
 #! /bin/bash
 
+npm run prettier
+git add source
+git commit -m 'prettier'
+
 npm run doc
 touch docs/.nojekyll
 touch docs/modules/.nojekyll

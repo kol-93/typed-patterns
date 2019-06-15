@@ -1,12 +1,23 @@
-import { Callback } from '../../util';
+import { Callback, TypedFunction } from '../../util';
 
-export type AsyncProcessor<Context, Result extends any[], Exception extends Error> = (
+/**
+ * Next processor selection function
+ */
+export type Next = TypedFunction<[], void>;
+
+/**
+ * Asynchronous processor for building chain-of-responsibility pattern
+ */
+export type AsyncProcessor<Context, Result extends any[] = any[], Exception extends Error = Error> = (
   context: Context,
   callback?: Callback<Result, Exception>,
-  next?: () => void
+  next?: Next
 ) => void;
 
-export interface IChainedProcessor<Context, Result extends any[], Exception extends Error> {
+/**
+ * Chain of responsibility processor
+ */
+export interface IChainedProcessor<Context, Result extends any[] = any[], Exception extends Error = Error> {
   (context: Context, callback?: Callback<Result, Exception>, next?: () => void): void;
   __promisify__: (
     context: Context

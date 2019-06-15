@@ -7,7 +7,7 @@ import { unexpected } from './unexpected';
 /**
  * Callback function type
  */
-export type Callback<Result extends any[], Exception extends Error> = (
+export type Callback<Result extends any[] = any[], Exception extends Error = Error> = (
   error?: Exception | null,
   ...result: Result
 ) => void;
@@ -15,7 +15,11 @@ export type Callback<Result extends any[], Exception extends Error> = (
 /**
  * Asynchronous worker function type
  */
-export type AsyncWorker<Result extends any[], Exception extends Error, Parameter = void> = Parameter extends void
+export type AsyncWorker<
+  Result extends any[] = any[],
+  Exception extends Error = Error,
+  Parameter = void
+> = Parameter extends void
   ? (callback?: Callback<Result, Exception>) => void
   : (parameter: Parameter, callback?: Callback<Result, Exception>) => void;
 
