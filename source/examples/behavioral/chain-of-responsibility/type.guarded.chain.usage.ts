@@ -6,36 +6,40 @@ function numberGuard(value: any): value is number {
 
 const numericProcessor = guardAsyncProcessor(
   (value: any): value is number => typeof value === 'number',
-  (context, callback, next) => success(callback, context * context),
+  (context, callback, next) => success(callback, context * context)
 );
 
 const stringProcessor = guardAsyncProcessor(
   (value: any): value is string => typeof value === 'string',
-  (context, callback, next) => success(callback, context + context),
+  (context, callback, next) => success(callback, context + context)
 );
 
 const booleanProcessor = guardAsyncProcessor(
   (value: any): value is boolean => typeof value === 'boolean',
-  (context, callback, next) => success(callback, !context),
+  (context, callback, next) => success(callback, !context)
 );
 
 const processor = buildAsyncProcessor([numericProcessor, stringProcessor, booleanProcessor]);
 
 const callWith = (value: any, next?: Next) => {
-  processor(value, (error, result) => {
-    if (error) {
-      console.log('Processing of %j failed: %s', value, error);
-    } else {
-      console.log('Processing of %j succeeded: %j', value, result);
-    }
-  }, next);
+  processor(
+    value,
+    (error, result) => {
+      if (error) {
+        console.log('Processing of %j failed: %s', value, error);
+      } else {
+        console.log('Processing of %j succeeded: %j', value, result);
+      }
+    },
+    next
+  );
 };
 
 callWith(10);
 // You will see:
 // Processing of 10 succeeded: 100
 
-callWith("10");
+callWith('10');
 // You will see:
 // Processing of "10" succeeded: "1010"
 

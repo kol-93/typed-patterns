@@ -96,7 +96,7 @@ describe('buildAsyncProcessor', () => {
     }, 1);
   });
 
-  it('should suppress callbacks from processors that called next', (done) => {
+  it('should suppress callbacks from processors that called next', done => {
     const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, next?: () => void) => {
       if (typeof next === 'function') {
         next();
@@ -120,7 +120,7 @@ describe('buildAsyncProcessor', () => {
     }, 1);
   });
 
-  it('should suppress next calls after callback', (done) => {
+  it('should suppress next calls after callback', done => {
     const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
       util.success(cb, 1);
       if (typeof n === 'function') {

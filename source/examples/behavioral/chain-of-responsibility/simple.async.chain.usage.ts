@@ -27,20 +27,24 @@ const booleanProcessor: AsyncProcessor<any, [any]> = (context, callback, next) =
 const processor = buildAsyncProcessor([numericProcessor, stringProcessor, booleanProcessor]);
 
 const callWith = (value: any, next?: Next) => {
-  processor(value, (error, result) => {
-    if (error) {
-      console.log('Processing of %j failed: %s', value, error);
-    } else {
-      console.log('Processing of %j succeeded: %j', value, result);
-    }
-  }, next);
+  processor(
+    value,
+    (error, result) => {
+      if (error) {
+        console.log('Processing of %j failed: %s', value, error);
+      } else {
+        console.log('Processing of %j succeeded: %j', value, result);
+      }
+    },
+    next
+  );
 };
 
 callWith(10);
 // You will see:
 // Processing of 10 succeeded: 100
 
-callWith("10");
+callWith('10');
 // You will see:
 // Processing of "10" succeeded: "1010"
 

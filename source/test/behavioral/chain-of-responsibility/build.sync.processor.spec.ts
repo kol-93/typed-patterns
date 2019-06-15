@@ -12,16 +12,18 @@ describe('buildSyncProcessor', () => {
 
   it('should pass errors from processors', () => {
     const e = new Error();
-    expect(buildSyncProcessor([
-      () => { throw e; } ,
-    ])).toThrow(e);
+    expect(
+      buildSyncProcessor([
+        () => {
+          throw e;
+        }
+      ])
+    ).toThrow(e);
   });
 
   it('should pass result from processors', () => {
     const result = { x: 42 };
-    expect(buildSyncProcessor([
-      () => result
-    ])({})).toBe(result);
+    expect(buildSyncProcessor([() => result])({})).toBe(result);
   });
 
   it('should break chain after first successful result', () => {

@@ -20,5 +20,5 @@ export function buildSyncProcessor<Context, Result>(
       }
     }
     throw new Unexpected('Unexpected context');
-  }
+  };
 }

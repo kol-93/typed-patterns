@@ -28,18 +28,21 @@ const booleanProcessor: AsyncProcessor<any, [any]> = (context, callback, next) =
 const processor = util.promisify(buildAsyncProcessor([numericProcessor, stringProcessor, booleanProcessor]));
 
 const callWith = (value: any) => {
-  processor(value).then((result) => {
-    console.log('Processing of %j succeeded: %j', value, result);
-  }, (error) => {
-    console.log('Processing of %j failed: %s', value, error);
-  });
+  processor(value).then(
+    result => {
+      console.log('Processing of %j succeeded: %j', value, result);
+    },
+    error => {
+      console.log('Processing of %j failed: %s', value, error);
+    }
+  );
 };
 
 callWith(10);
 // You will see:
 // Processing of 10 succeeded: 100
 
-callWith("10");
+callWith('10');
 // You will see:
 // Processing of "10" succeeded: "1010"
 
