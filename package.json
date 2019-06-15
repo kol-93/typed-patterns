@@ -1,6 +1,6 @@
 {
   "name": "typed-patterns",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Basic design patterns",
   "scripts": {
     "doc": "typedoc --out docs --tsconfig tsconfig.lib.json",
