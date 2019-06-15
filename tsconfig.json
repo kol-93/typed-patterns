@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "baseUrl": ".",
+    "module": "commonjs",
+    "lib": ["es5", "es6"],
+    "declaration": true,
+    "declarationMap": true,
+    "rootDir": "source",
+    "outDir": "lib-test",
+    "allowJs": false,
+    "removeComments": false,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "newLine": "LF"
+  },
+  "include": [
+    "source/**/*.ts"
+  ]
+}

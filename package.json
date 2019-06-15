@@ -1,0 +1,49 @@
+{
+  "name": "typed-patterns",
+  "version": "0.2.6",
+  "description": "Basic design patterns",
+  "scripts": {
+    "doc": "typedoc --out doc --tsconfig tsconfig.lib.json",
+    "build": "tsc --project tsconfig.lib.json",
+    "watch": "tsc --project tsconfig.lib.json --watch",
+    "dev-build": "tsc --project tsconfig.json",
+    "dev-watch": "tsc --project tsconfig.json --watch",
+    "prettier": "prettier --write src/**/*",
+    "test": "jest --rootDir lib-test .spec.js"
+  },
+  "keywords": [
+    "design",
+    "patterns",
+    "design patterns",
+    "typesccript"
+  ],
+  "author": "kol1993@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/async": "^3.0.0",
+    "@types/jest": "^24.0.14",
+    "@types/node": "^8.0.0",
+    "husky": "^2.2.0",
+    "jest": "^24.8.0",
+    "lint-staged": "^8.1.6",
+    "prettier": "^1.17.0",
+    "tslint": "^5.16.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.4.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "tslint --fix",
+      "prettier --write src/**/*",
+      "git add"
+    ]
+  }
+}

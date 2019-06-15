@@ -1,0 +1,25 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "quotemark": false,
+    "trailing-comma": false,
+    "semicolon": false,
+    "no-console": {
+      "severity": "warn"
+    },
+    "arrow-parens": false,
+    "no-empty-interface": false,
+    "variable-name": false,
+    "member-ordering": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "adjacent-overload-signatures": false,
+    "no-bitwise": false,
+    "no-namespace": false,
+    "max-classes-per-file": false,
+    "no-require-imports": false
+  },
+  "linterOptions": {
+    "exclude": ["node_modules"]
+  }
+}
