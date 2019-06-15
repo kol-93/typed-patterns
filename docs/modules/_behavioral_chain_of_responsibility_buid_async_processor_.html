@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;util/next.tick&quot; | typed-patterns</title>
+	<title>&quot;behavioral/chain-of-responsibility/buid.async.processor&quot; | typed-patterns</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_util_next_tick_.html">&quot;util/next.tick&quot;</a>
+					<a href="_behavioral_chain_of_responsibility_buid_async_processor_.html">&quot;behavioral/chain-of-responsibility/buid.async.processor&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;util/next.tick&quot;</h1>
+			<h1>External module &quot;behavioral/chain-of-responsibility/buid.async.processor&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -73,15 +73,13 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_util_next_tick_.html#_nexttick" class="tsd-kind-icon">_next<wbr>Tick</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_behavioral_chain_of_responsibility_buid_async_processor_.html#custom" class="tsd-kind-icon">custom</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_util_next_tick_.html#getglobal" class="tsd-kind-icon">get<wbr>Global</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_util_next_tick_.html#getnexttick" class="tsd-kind-icon">get<wbr>Next<wbr>Tick</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_util_next_tick_.html#nexttick" class="tsd-kind-icon">next<wbr>Tick</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_behavioral_chain_of_responsibility_buid_async_processor_.html#buildasyncprocessor" class="tsd-kind-icon">build<wbr>Async<wbr>Processor</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,94 +88,58 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="_nexttick" class="tsd-anchor"></a>
-					<h3>_next<wbr>Tick</h3>
-					<div class="tsd-signature tsd-kind-icon">_next<wbr>Tick<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> =&nbsp;getNextTick()</span></div>
+					<a name="custom" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> custom</h3>
+					<div class="tsd-signature tsd-kind-icon">custom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol"> =&nbsp;getPromisifyCustomSymbol()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/958559e/source/util/next.tick.ts#L83">util/next.tick.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/a859347/source/behavioral/chain-of-responsibility/buid.async.processor.ts#L4">behavioral/chain-of-responsibility/buid.async.processor.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="getglobal" class="tsd-anchor"></a>
-					<h3>get<wbr>Global</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Global<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/958559e/source/util/next.tick.ts#L6">util/next.tick.ts:6</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Returns global or window. Depends on environment</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="getnexttick" class="tsd-anchor"></a>
-					<h3>get<wbr>Next<wbr>Tick</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Next<wbr>Tick<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/958559e/source/util/next.tick.ts#L21">util/next.tick.ts:21</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Returns a function that can set up your operator as soon as possible in your environment</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Function</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-					<a name="nexttick" class="tsd-anchor"></a>
-					<h3>next<wbr>Tick</h3>
+					<a name="buildasyncprocessor" class="tsd-anchor"></a>
+					<h3>build<wbr>Async<wbr>Processor</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">next<wbr>Tick&lt;Args, Result&gt;<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><a href="_util_typed_function_.html#typedfunction" class="tsd-signature-type">TypedFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Args</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Args</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">build<wbr>Async<wbr>Processor&lt;Context, Result, Exception&gt;<span class="tsd-signature-symbol">(</span>processors<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="_behavioral_chain_of_responsibility_interface_.html#asyncprocessor" class="tsd-signature-type">AsyncProcessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Context</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_behavioral_chain_of_responsibility_interface_.ichainedprocessor.html" class="tsd-signature-type">IChainedProcessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Context</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/958559e/source/util/next.tick.ts#L76">util/next.tick.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/a859347/source/behavioral/chain-of-responsibility/buid.async.processor.ts#L10">behavioral/chain-of-responsibility/buid.async.processor.ts:10</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates asynchronous processor based on chain-of-responsibility</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>Args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h4>
+									<h4>Context</h4>
 								</li>
 								<li>
-									<h4>Result</h4>
+									<h4>Result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h4>
+								</li>
+								<li>
+									<h4>Exception<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>operator: <a href="_util_typed_function_.html#typedfunction" class="tsd-signature-type">TypedFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Args</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">Args</span></h5>
+									<h5>processors: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="_behavioral_chain_of_responsibility_interface_.html#asyncprocessor" class="tsd-signature-type">AsyncProcessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Context</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Chain of single-responsible processors</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_behavioral_chain_of_responsibility_interface_.ichainedprocessor.html" class="tsd-signature-type">IChainedProcessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Context</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -189,7 +151,7 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_behavioral_chain_of_responsibility_buid_async_processor_.html">"behavioral/chain-<wbr>of-<wbr>responsibility/buid.async.processor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -213,7 +175,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_util_name_space_.html">"util/name.space"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_util_next_tick_.html">"util/next.tick"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -233,16 +195,10 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_util_next_tick_.html#_nexttick" class="tsd-kind-icon">_next<wbr>Tick</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_util_next_tick_.html#getglobal" class="tsd-kind-icon">get<wbr>Global</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_util_next_tick_.html#getnexttick" class="tsd-kind-icon">get<wbr>Next<wbr>Tick</a>
+						<a href="_behavioral_chain_of_responsibility_buid_async_processor_.html#custom" class="tsd-kind-icon">custom</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_util_next_tick_.html#nexttick" class="tsd-kind-icon">next<wbr>Tick</a>
+						<a href="_behavioral_chain_of_responsibility_buid_async_processor_.html#buildasyncprocessor" class="tsd-kind-icon">build<wbr>Async<wbr>Processor</a>
 					</li>
 				</ul>
 			</nav>

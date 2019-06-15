@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;util/unexpected&quot; | typed-patterns</title>
+	<title>&quot;behavioral/chain-of-responsibility/interface&quot; | typed-patterns</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_util_unexpected_.html">&quot;util/unexpected&quot;</a>
+					<a href="_behavioral_chain_of_responsibility_interface_.html">&quot;behavioral/chain-of-responsibility/interface&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;util/unexpected&quot;</h1>
+			<h1>External module &quot;behavioral/chain-of-responsibility/interface&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -71,59 +71,58 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_util_unexpected_.unexpected.html" class="tsd-kind-icon">Unexpected</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../interfaces/_behavioral_chain_of_responsibility_interface_.ichainedprocessor.html" class="tsd-kind-icon">IChained<wbr>Processor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Functions</h3>
+							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_util_unexpected_.html#unexpected-1" class="tsd-kind-icon">unexpected</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_behavioral_chain_of_responsibility_interface_.html#asyncprocessor" class="tsd-kind-icon">Async<wbr>Processor</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-					<a name="unexpected-1" class="tsd-anchor"></a>
-					<h3>unexpected</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">unexpected&lt;Result, Exception&gt;<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">?: </span><a href="_util_async_helpers_.html#callback" class="tsd-signature-type">Callback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span>, next<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/958559e/source/util/unexpected.ts#L11">util/unexpected.ts:11</a></li>
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="asyncprocessor" class="tsd-anchor"></a>
+					<h3>Async<wbr>Processor</h3>
+					<div class="tsd-signature tsd-kind-icon">Async<wbr>Processor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/kol-93/typed-patterns/blob/a859347/source/behavioral/chain-of-responsibility/interface.ts#L4">behavioral/chain-of-responsibility/interface.ts:4</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Context</span>, callback<span class="tsd-signature-symbol">?: </span><a href="_util_async_helpers_.html#callback" class="tsd-signature-type">Callback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span>, next<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 								</ul>
-							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>Result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h4>
-								</li>
-								<li>
-									<h4>Exception<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span></h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> message: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Unexpected context&quot;</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <a href="_util_async_helpers_.html#callback" class="tsd-signature-type">Callback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> next: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>context: <span class="tsd-signature-type">Context</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <a href="_util_async_helpers_.html#callback" class="tsd-signature-type">Callback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Exception</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> next: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -139,7 +138,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_behavioral_chain_of_responsibility_index_.html">"behavioral/chain-<wbr>of-<wbr>responsibility/index"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_behavioral_chain_of_responsibility_interface_.html">"behavioral/chain-<wbr>of-<wbr>responsibility/interface"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -169,18 +168,18 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_util_typed_function_.html">"util/typed.function"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_util_unexpected_.html">"util/unexpected"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_util_unexpected_.unexpected.html" class="tsd-kind-icon">Unexpected</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../interfaces/_behavioral_chain_of_responsibility_interface_.ichainedprocessor.html" class="tsd-kind-icon">IChained<wbr>Processor</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_util_unexpected_.html#unexpected-1" class="tsd-kind-icon">unexpected</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_behavioral_chain_of_responsibility_interface_.html#asyncprocessor" class="tsd-kind-icon">Async<wbr>Processor</a>
 					</li>
 				</ul>
 			</nav>

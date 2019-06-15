@@ -1,6 +1,6 @@
 #! /bin/bash
 
-npm run doc
+npm run docs
 git push
 if test -n "$1"
 then

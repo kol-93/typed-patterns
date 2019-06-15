@@ -169,4 +169,4 @@ tsconfig.json
 tsconfig.lib.json
 npm-publish.sh
 git-publish.sh
-doc
+docs

@@ -3,7 +3,7 @@
   "version": "0.2.6",
   "description": "Basic design patterns",
   "scripts": {
-    "doc": "typedoc --out doc --tsconfig tsconfig.lib.json",
+    "doc": "typedoc --out docs --tsconfig tsconfig.lib.json",
     "build": "tsc --project tsconfig.lib.json",
     "watch": "tsc --project tsconfig.lib.json --watch",
     "dev-build": "tsc --project tsconfig.json",
