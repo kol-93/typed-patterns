@@ -172,6 +172,9 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+# Whole idea
+.idea
+
 # Personal
 lib
 lib-test
