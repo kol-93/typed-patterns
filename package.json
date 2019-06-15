@@ -8,14 +8,14 @@
     "watch": "tsc --project tsconfig.lib.json --watch",
     "dev-build": "tsc --project tsconfig.json",
     "dev-watch": "tsc --project tsconfig.json --watch",
-    "prettier": "prettier --write src/**/*",
+    "prettier": "prettier --write \"source/**/*\"",
     "test": "jest --rootDir lib-test .spec.js"
   },
   "keywords": [
     "design",
     "patterns",
     "design patterns",
-    "typesccript"
+    "typescript"
   ],
   "author": "kol1993@gmail.com",
   "license": "ISC",
@@ -42,7 +42,7 @@
   "lint-staged": {
     "*.{ts}": [
       "tslint --fix",
-      "prettier --write src/**/*",
+      "prettier --write \"src/**/*\"",
       "git add"
     ]
   }

@@ -1,7 +1,7 @@
-import * as async from "async";
-import { AsyncProcessor } from "../behavioral/chain-of-responsibility";
-import { NameSpace } from "./name.space";
-import { TypedFunction } from "./typed.function";
+import * as async from 'async';
+import { AsyncProcessor } from '../behavioral/chain-of-responsibility';
+import { NameSpace } from './name.space';
+import { TypedFunction } from './typed.function';
 import { unexpected } from './unexpected';
 
 /**
@@ -15,11 +15,7 @@ export type Callback<Result extends any[], Exception extends Error> = (
 /**
  * Asynchronous worker function type
  */
-export type AsyncWorker<
-  Result extends any[],
-  Exception extends Error,
-  Parameter = void
-> = Parameter extends void
+export type AsyncWorker<Result extends any[], Exception extends Error, Parameter = void> = Parameter extends void
   ? (callback?: Callback<Result, Exception>) => void
   : (parameter: Parameter, callback?: Callback<Result, Exception>) => void;
 
@@ -39,10 +35,10 @@ export function fail<Result extends any[], Exception extends Error>(
   callback: Callback<Result, Exception> | undefined,
   error: Exception
 ) {
-  if (typeof callback === "function") {
+  if (typeof callback === 'function') {
     (callback as Callback<any[], Exception>)(error);
-  } else if (typeof callback !== "undefined") {
-    throw new TypeError("Function expected");
+  } else if (typeof callback !== 'undefined') {
+    throw new TypeError('Function expected');
   }
 }
 
@@ -55,10 +51,10 @@ export function success<Result extends any[], Exception extends Error>(
   callback: Callback<Result, Exception> | undefined,
   ...result: Result
 ) {
-  if (typeof callback === "function") {
+  if (typeof callback === 'function') {
     callback(null, ...result);
-  } else if (typeof callback !== "undefined") {
-    throw new TypeError("Function expected");
+  } else if (typeof callback !== 'undefined') {
+    throw new TypeError('Function expected');
   }
 }
 
@@ -71,11 +67,11 @@ export function join<Result extends any[], Exception extends Error>(
   onSuccess: TypedFunction<Result, void>,
   onFail: TypedFunction<[Exception], void>
 ): Callback<Result, Exception> {
-  if (typeof onSuccess !== "function") {
-    throw new TypeError("Function expected");
+  if (typeof onSuccess !== 'function') {
+    throw new TypeError('Function expected');
   }
-  if (typeof onFail !== "function") {
-    throw new TypeError("Function expected");
+  if (typeof onFail !== 'function') {
+    throw new TypeError('Function expected');
   }
   return function(error?: Exception | null, ...result: Result) {
     if (error) {
@@ -93,8 +89,8 @@ export function join<Result extends any[], Exception extends Error>(
 export function wrapCallback<Result extends any[], Exception extends Error>(
   callback: Callback<[Result], Exception>
 ): Callback<Result, Exception> {
-  if (typeof callback !== "function") {
-    throw new TypeError("Function expected");
+  if (typeof callback !== 'function') {
+    throw new TypeError('Function expected');
   }
   return function(error?: Exception | null, ...result: Result) {
     if (error) {
@@ -112,8 +108,8 @@ export function wrapCallback<Result extends any[], Exception extends Error>(
 export function unwrapCallback<Result extends any[], Exception extends Error>(
   callback: Callback<Result, Exception>
 ): Callback<[Result], Exception> {
-  if (typeof callback !== "function") {
-    throw new TypeError("Function expected");
+  if (typeof callback !== 'function') {
+    throw new TypeError('Function expected');
   }
   return function(error?: Exception | null, ...result: [Result]) {
     if (error) {
@@ -131,13 +127,11 @@ export function unwrapCallback<Result extends any[], Exception extends Error>(
 export function wrapWorker<Result extends any[], Exception extends Error>(
   worker: AsyncWorker<Result, Exception, void>
 ): AsyncWorker<[Result], Exception, void> {
-  if (typeof worker !== "function") {
-    throw new TypeError("Function expected");
+  if (typeof worker !== 'function') {
+    throw new TypeError('Function expected');
   }
   return function(callback) {
-    (worker as AsyncWorker<Result, Exception, void>)(
-      callback ? wrapCallback(callback) : undefined
-    );
+    (worker as AsyncWorker<Result, Exception, void>)(callback ? wrapCallback(callback) : undefined);
   } as AsyncWorker<[Result], Exception, void>;
 }
 
@@ -148,13 +142,11 @@ export function wrapWorker<Result extends any[], Exception extends Error>(
 export function unwrapWorker<Result extends any[], Exception extends Error>(
   worker: AsyncWorker<[Result], Exception, void>
 ): AsyncWorker<Result, Exception, void> {
-  if (typeof worker !== "function") {
-    throw new TypeError("Function expected");
+  if (typeof worker !== 'function') {
+    throw new TypeError('Function expected');
   }
   return function(callback) {
-    (worker as AsyncWorker<[Result], Exception, void>)(
-      callback ? unwrapCallback(callback) : undefined
-    );
+    (worker as AsyncWorker<[Result], Exception, void>)(callback ? unwrapCallback(callback) : undefined);
   } as AsyncWorker<Result, Exception, void>;
 }
 
@@ -208,11 +200,11 @@ export function guardAsyncProcessor<
   guard: (context: BaseContext) => context is SpecificContext,
   processor: AsyncProcessor<SpecificContext, Result, Exception>
 ): AsyncProcessor<BaseContext, Result, Error> {
-  if (typeof guard !== "function") {
-    throw new TypeError("Function expected as guard");
+  if (typeof guard !== 'function') {
+    throw new TypeError('Function expected as guard');
   }
-  if (typeof processor !== "function") {
-    throw new TypeError("Function expected as guard");
+  if (typeof processor !== 'function') {
+    throw new TypeError('Function expected as guard');
   }
   return (context, callback, next) => {
     if (!guard(context)) {

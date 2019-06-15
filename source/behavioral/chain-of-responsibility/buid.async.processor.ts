@@ -71,12 +71,12 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
             } else {
               resolve();
             }
-          })
+          });
         });
       },
       configurable: false,
       writable: false,
-      enumerable: false,
+      enumerable: false
     });
   }
 

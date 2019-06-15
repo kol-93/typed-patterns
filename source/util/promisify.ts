@@ -1,4 +1,3 @@
-
 export function getPromisifyCustomSymbol(): symbol | undefined {
   if (typeof require === 'function') {
     try {
@@ -6,8 +5,7 @@ export function getPromisifyCustomSymbol(): symbol | undefined {
       if (typeof value === 'symbol') {
         return value;
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   }
   return;
 }

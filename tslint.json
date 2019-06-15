@@ -17,7 +17,11 @@
     "no-bitwise": false,
     "no-namespace": false,
     "max-classes-per-file": false,
-    "no-require-imports": false
+    "no-require-imports": false,
+    "interface-name": false,
+    "only-arrow-functions": false,
+    "ban-types": false,
+    "no-var-keyword": false
   },
   "linterOptions": {
     "exclude": ["node_modules"]
