@@ -1,5 +1,5 @@
 import * as dbg from 'debug';
-import { Callback, getPromisifyCustomSymbol, nextTick, unexpected, fail, TypedFunction } from '../../util';
+import { Callback, getPromisifyCustomSymbol, nextTick, unexpected, fail, TypedFunction, Unexpected } from '../../util';
 import { AsyncProcessor, IChainedProcessor } from './interface';
 
 const debug = dbg.debug('typed-patterns/behavioral/build.async.processor');
@@ -23,6 +23,9 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
         } else if (iterator === null) {
           debug(new Error('Duplicate callback detected. Suppressing'));
           return;
+        } else if (arguments[0] instanceof Unexpected) {
+          debug('Unexpected found. Simulating next()');
+          nexti(callbackProcessor)();
         } else {
           iterator = null;
           if (typeof callback === 'function') {
@@ -41,17 +44,18 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
       return function _next() {
         if (callbackProcessor !== undefined && activeProcessor !== callbackProcessor) {
           debug(new Error('Duplicate next call detected. Suppressing'));
-          return;
         } else if (iterator === null) {
           debug(new Error('Next call detected after callback. Suppressing'));
-          return;
         } else {
           const it = iterator.next();
           activeProcessor += 1;
+          debug(activeProcessor);
+          const cb_i = cbi(activeProcessor);
+          const next_i = nexti(activeProcessor);
           if (!it.done) {
             nextTick(() => {
               try {
-                it.value.call(null, context, cbi(activeProcessor), nexti(activeProcessor));
+                it.value.call(null, context, cb_i, next_i);
               } catch (e) {
                 fail(cbi(activeProcessor), e);
               }

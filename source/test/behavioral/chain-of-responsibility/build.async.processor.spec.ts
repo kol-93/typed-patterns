@@ -1,4 +1,4 @@
-import { Callback, success } from '../../../util';
+import { Callback, success, Unexpected } from '../../../util';
 import * as util from '../../../util';
 import { buildAsyncProcessor, Next } from '../../../behavioral/chain-of-responsibility';
 
@@ -37,7 +37,7 @@ describe('buildAsyncProcessor', () => {
     }, 1);
   });
 
-  it('should pass synchronous error to callback', done => {
+  it('should pass synchronous error to callback except ', done => {
     const e = new Error();
     buildAsyncProcessor([
       () => {
@@ -139,5 +139,59 @@ describe('buildAsyncProcessor', () => {
       expect(next).not.toBeCalled();
       done();
     }, 1);
+  });
+
+  it('should suppress repeatable next calls', (done) => {
+    const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
+      if (typeof n === 'function') {
+        n();
+        n();
+      }
+    });
+    const p2 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
+      util.success(cb, 2);
+    });
+    const p3 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
+      util.success(cb, 3);
+    });
+
+    const callback = jest.fn();
+    const next = jest.fn();
+
+    buildAsyncProcessor([p1, p2, p3])({}, callback, next);
+    setTimeout(() => {
+      expect(p1).toBeCalled();
+      expect(p2).toBeCalled();
+      expect(p3).not.toBeCalled();
+      expect(callback).toBeCalledTimes(1);
+      expect(callback).toBeCalledWith(null, 2);
+      expect(next).not.toBeCalled();
+      done();
+    }, 10);
+  });
+
+  it('should simulate next() if processor raised Unexpected exception', (done) => {
+    const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
+      util.fail(cb, new Unexpected(''));
+    });
+    const p2 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
+      util.fail(cb, new Unexpected(''));
+    });
+    const p3 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
+      util.success(cb, 3);
+    });
+    const callback = jest.fn();
+    const next = jest.fn();
+
+    buildAsyncProcessor([p1, p2, p3])({}, callback, next);
+    setTimeout(() => {
+      expect(p1).toBeCalled();
+      expect(p2).toBeCalled();
+      expect(p3).toBeCalled();
+      expect(callback).toBeCalledTimes(1);
+      expect(callback).toBeCalledWith(null, 3);
+      expect(next).not.toBeCalled();
+      done();
+    }, 10);
   });
 });
