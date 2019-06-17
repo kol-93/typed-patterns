@@ -141,7 +141,7 @@ describe('buildAsyncProcessor', () => {
     }, 1);
   });
 
-  it('should suppress repeatable next calls', (done) => {
+  it('should suppress repeatable next calls', done => {
     const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
       if (typeof n === 'function') {
         n();
@@ -170,7 +170,7 @@ describe('buildAsyncProcessor', () => {
     }, 10);
   });
 
-  it('should simulate next() if processor raised Unexpected exception', (done) => {
+  it('should simulate next() if processor raised Unexpected exception', done => {
     const p1 = jest.fn((context: {}, cb?: Callback<[number], Error>, n?: () => void) => {
       util.fail(cb, new Unexpected(''));
     });
