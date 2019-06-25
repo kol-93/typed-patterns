@@ -1,7 +1,7 @@
 import { AsyncProcessor } from '../behavioral/chain-of-responsibility';
 import { fail, success } from './async.helpers';
 import { TypedFunction } from './typed.function';
-import { Unexpected } from './unexpected';
+import { unexpected, Unexpected } from './unexpected';
 
 export function guardPromiseProcessor<BaseContext, SpecificContext extends BaseContext, Result>(
   guard: (context: BaseContext) => context is SpecificContext,
@@ -15,11 +15,7 @@ export function guardPromiseProcessor<BaseContext, SpecificContext extends BaseC
   }
   return (context, callback, next) => {
     if (!guard(context)) {
-      if (typeof next === 'function') {
-        next();
-      } else {
-        fail(callback, new Unexpected('Invalid context type'));
-      }
+      unexpected(undefined, callback, next);
     } else {
       processor(context).then(result => success(callback, result), error => fail(callback, error));
     }

@@ -5,6 +5,6 @@
   },
   "exclude": [
     "source/test/**/*.ts",
-    "source/examples/**/*.ts",
+    "source/examples/**/*.ts"
   ]
 }

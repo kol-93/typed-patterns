@@ -1,4 +1,4 @@
-import { Callback, success, Unexpected } from '../../../util';
+import { Callback, guardPromiseProcessor, success, Unexpected } from '../../../util';
 import * as util from '../../../util';
 import { buildAsyncProcessor, Next } from '../../../behavioral/chain-of-responsibility';
 
@@ -193,5 +193,21 @@ describe('buildAsyncProcessor', () => {
       expect(next).not.toBeCalled();
       done();
     }, 10);
+  });
+
+  test('should pass Unexpected to callback if any processor can process context', (done) => {
+    const proc = jest.fn(async (context: { value: number }) => undefined);
+
+    const p1 = jest.fn(guardPromiseProcessor(
+      (context: { value: any }): context is {value: number} => typeof context.value === 'number',
+      proc,
+    ));
+
+    const callback = (error: any) => {
+      expect(proc).not.toBeCalled();
+      expect(error).toBeInstanceOf(util.Unexpected);
+      done();
+    };
+    buildAsyncProcessor([p1, p1, p1, p1, p1, p1, p1, p1])({ value: '' }, callback);
   });
 });

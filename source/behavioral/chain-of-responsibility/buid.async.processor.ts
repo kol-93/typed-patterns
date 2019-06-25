@@ -15,6 +15,7 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
   function chained(context: Context, callback?: Callback<Result, Exception>, next?: () => void) {
     let iterator: Iterator<AsyncProcessor<Context, Result, Exception>> | null = processors[Symbol.iterator]();
     let activeProcessor = 0;
+    let iteratorDone = false;
     function cbi(callbackProcessor?: number): Callback<Result, Exception> {
       return function _callback() {
         if (callbackProcessor !== undefined && activeProcessor !== callbackProcessor) {
@@ -23,7 +24,7 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
         } else if (iterator === null) {
           debug(new Error('Duplicate callback detected. Suppressing'));
           return;
-        } else if (arguments[0] instanceof Unexpected) {
+        } else if (!iteratorDone && arguments[0] instanceof Unexpected) {
           debug('Unexpected found. Simulating next()');
           nexti(callbackProcessor)();
         } else {
@@ -47,20 +48,21 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
         } else if (iterator === null) {
           debug(new Error('Next call detected after callback. Suppressing'));
         } else {
-          const it = iterator.next();
+          const {done, value: operator} = iterator.next();
           activeProcessor += 1;
           debug(activeProcessor);
           const cb_i = cbi(activeProcessor);
           const next_i = nexti(activeProcessor);
-          if (!it.done) {
+          if (!done) {
             nextTick(() => {
               try {
-                it.value.call(null, context, cb_i, next_i);
+                operator(context, cb_i, next_i);
               } catch (e) {
                 fail(cbi(activeProcessor), e);
               }
             });
           } else {
+            iteratorDone = true;
             unexpected(undefined, cbi(activeProcessor), next);
           }
         }
