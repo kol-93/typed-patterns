@@ -48,7 +48,7 @@ export function buildAsyncProcessor<Context, Result extends any[], Exception ext
         } else if (iterator === null) {
           debug(new Error('Next call detected after callback. Suppressing'));
         } else {
-          const {done, value: operator} = iterator.next();
+          const { done, value: operator } = iterator.next();
           activeProcessor += 1;
           debug(activeProcessor);
           const cb_i = cbi(activeProcessor);

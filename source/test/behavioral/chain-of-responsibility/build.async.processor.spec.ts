@@ -195,13 +195,15 @@ describe('buildAsyncProcessor', () => {
     }, 10);
   });
 
-  test('should pass Unexpected to callback if any processor can process context', (done) => {
+  test('should pass Unexpected to callback if any processor can process context', done => {
     const proc = jest.fn(async (context: { value: number }) => undefined);
 
-    const p1 = jest.fn(guardPromiseProcessor(
-      (context: { value: any }): context is {value: number} => typeof context.value === 'number',
-      proc,
-    ));
+    const p1 = jest.fn(
+      guardPromiseProcessor(
+        (context: { value: any }): context is { value: number } => typeof context.value === 'number',
+        proc
+      )
+    );
 
     const callback = (error: any) => {
       expect(proc).not.toBeCalled();
