@@ -16,9 +16,13 @@ describe('buildAsyncProcessor', () => {
       (context, callback, next) => next && next(),
       (context, callback, next) => next && next()
     ])({}, _cb, _next);
-    expect(_cb).not.toBeCalled();
-    expect(_next).not.toBeCalled();
-    done();
+    try {
+      expect(_cb).not.toBeCalled();
+      expect(_next).not.toBeCalled();
+      done();
+    } catch (e) {
+      done.fail(e);
+    }
   });
 
   it('should work before any timeout', done => {
@@ -31,9 +35,13 @@ describe('buildAsyncProcessor', () => {
       (context, callback, next) => next && next()
     ])({}, _cb, _next);
     setTimeout(() => {
-      expect(_next).toBeCalled();
-      expect(_cb).not.toBeCalled();
-      done();
+      try {
+        expect(_next).toBeCalled();
+        expect(_cb).not.toBeCalled();
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     }, 1);
   });
 
@@ -44,8 +52,12 @@ describe('buildAsyncProcessor', () => {
         throw e;
       }
     ])({}, error => {
-      expect(error).toBe(e);
-      done();
+      try {
+        expect(error).toBe(e);
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     });
   });
 
@@ -53,10 +65,14 @@ describe('buildAsyncProcessor', () => {
     const fn = jest.fn();
     buildAsyncProcessor([
       (context, callback, next) => {
-        util.success(callback);
-        util.success(callback);
-        expect(fn).toBeCalledTimes(1);
-        done();
+        try {
+          util.success(callback);
+          util.success(callback);
+          expect(fn).toBeCalledTimes(1);
+          done();
+        } catch (e) {
+          done.fail(e);
+        }
       }
     ])({}, fn);
   });
@@ -66,11 +82,15 @@ describe('buildAsyncProcessor', () => {
     const fn = jest.fn();
     buildAsyncProcessor([
       (context, callback, next) => {
-        if (typeof callback === 'function') {
-          (callback as Function)(...args);
+        try {
+          if (typeof callback === 'function') {
+            (callback as Function)(...args);
+          }
+          expect(fn).toBeCalledWith(...args);
+          done();
+        } catch (e) {
+          done.fail(e);
         }
-        expect(fn).toBeCalledWith(...args);
-        done();
       }
     ])({}, fn);
   });
@@ -89,10 +109,14 @@ describe('buildAsyncProcessor', () => {
     buildAsyncProcessor([proc1, proc2])({}, fn);
 
     setTimeout(() => {
-      expect(proc1).toBeCalled();
-      expect(proc2).not.toBeCalled();
-      expect(fn).toBeCalledWith(null, 1);
-      done();
+      try {
+        expect(proc1).toBeCalled();
+        expect(proc2).not.toBeCalled();
+        expect(fn).toBeCalledWith(null, 1);
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     }, 1);
   });
 
@@ -112,11 +136,15 @@ describe('buildAsyncProcessor', () => {
 
     buildAsyncProcessor([p1, p2])({}, callback);
     setTimeout(() => {
-      expect(p1).toBeCalled();
-      expect(p2).toBeCalled();
-      expect(callback).toBeCalledTimes(1);
-      expect(callback).toBeCalledWith(null, 2);
-      done();
+      try {
+        expect(p1).toBeCalled();
+        expect(p2).toBeCalled();
+        expect(callback).toBeCalledTimes(1);
+        expect(callback).toBeCalledWith(null, 2);
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     }, 1);
   });
 
@@ -133,11 +161,15 @@ describe('buildAsyncProcessor', () => {
 
     buildAsyncProcessor([p1])({}, callback, next);
     setTimeout(() => {
-      expect(p1).toBeCalled();
-      expect(callback).toBeCalledTimes(1);
-      expect(callback).toBeCalledWith(null, 1);
-      expect(next).not.toBeCalled();
-      done();
+      try {
+        expect(p1).toBeCalled();
+        expect(callback).toBeCalledTimes(1);
+        expect(callback).toBeCalledWith(null, 1);
+        expect(next).not.toBeCalled();
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     }, 1);
   });
 
@@ -160,13 +192,17 @@ describe('buildAsyncProcessor', () => {
 
     buildAsyncProcessor([p1, p2, p3])({}, callback, next);
     setTimeout(() => {
-      expect(p1).toBeCalled();
-      expect(p2).toBeCalled();
-      expect(p3).not.toBeCalled();
-      expect(callback).toBeCalledTimes(1);
-      expect(callback).toBeCalledWith(null, 2);
-      expect(next).not.toBeCalled();
-      done();
+      try {
+        expect(p1).toBeCalled();
+        expect(p2).toBeCalled();
+        expect(p3).not.toBeCalled();
+        expect(callback).toBeCalledTimes(1);
+        expect(callback).toBeCalledWith(null, 2);
+        expect(next).not.toBeCalled();
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     }, 10);
   });
 
@@ -185,13 +221,17 @@ describe('buildAsyncProcessor', () => {
 
     buildAsyncProcessor([p1, p2, p3])({}, callback, next);
     setTimeout(() => {
-      expect(p1).toBeCalled();
-      expect(p2).toBeCalled();
-      expect(p3).toBeCalled();
-      expect(callback).toBeCalledTimes(1);
-      expect(callback).toBeCalledWith(null, 3);
-      expect(next).not.toBeCalled();
-      done();
+      try {
+        expect(p1).toBeCalled();
+        expect(p2).toBeCalled();
+        expect(p3).toBeCalled();
+        expect(callback).toBeCalledTimes(1);
+        expect(callback).toBeCalledWith(null, 3);
+        expect(next).not.toBeCalled();
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     }, 10);
   });
 
@@ -206,9 +246,13 @@ describe('buildAsyncProcessor', () => {
     );
 
     const callback = (error: any) => {
-      expect(proc).not.toBeCalled();
-      expect(error).toBeInstanceOf(util.Unexpected);
-      done();
+      try {
+        expect(proc).not.toBeCalled();
+        expect(error).toBeInstanceOf(util.Unexpected);
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     };
     buildAsyncProcessor([p1, p1, p1, p1, p1, p1, p1, p1])({ value: '' }, callback);
   });

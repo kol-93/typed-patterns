@@ -23,8 +23,12 @@ describe('util.nextTick', () => {
     const fn = jest.fn();
     util.nextTick(fn);
     util.nextTick(() => {
-      expect(fn).toBeCalled();
-      done();
+      try {
+        expect(fn).toBeCalled();
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     });
     expect(fn).not.toBeCalled();
   });
@@ -34,8 +38,12 @@ describe('util.nextTick', () => {
       const fn = jest.fn();
       util.nextTick(fn);
       (global.setImmediate as Function)(() => {
-        expect(fn).toBeCalled();
-        done();
+        try {
+          expect(fn).toBeCalled();
+          done();
+        } catch (e) {
+          done.fail(e);
+        }
       });
       expect(fn).not.toBeCalled();
     } else {
@@ -47,8 +55,12 @@ describe('util.nextTick', () => {
     const fn = jest.fn();
     util.nextTick(fn);
     setTimeout(() => {
-      expect(fn).toBeCalled();
-      done();
+      try {
+        expect(fn).toBeCalled();
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     }, 1);
     expect(fn).not.toBeCalled();
   });
